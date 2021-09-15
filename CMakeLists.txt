@@ -3,6 +3,7 @@ project(engine_test)
 
 set(CMAKE_CXX_STANDARD 14)
 
+set(LIBC ON)
 add_subdirectory(lib/SDL)
 add_subdirectory(lib/bgfx)
 
