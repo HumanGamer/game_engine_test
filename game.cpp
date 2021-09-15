@@ -1,5 +1,7 @@
-#include <bgfx/bgfx.h>
 #include "game.h"
+#include <bgfx/bgfx.h>
+
+#include "BGFXUtil.h"
 
 Game::Game(SDL_Window* window) : mWindow(window)
 {
@@ -13,7 +15,8 @@ Game::~Game()
 
 void Game::init()
 {
-
+    bgfxUtilInit();
+    mShader = new BGFXShader("textureDiscardColor");
 }
 
 void Game::update()

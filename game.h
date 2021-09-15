@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include "BGFXShader.h"
 
 class Game
 {
@@ -14,4 +15,6 @@ public:
 
 private:
     SDL_Window* mWindow;
+
+    BGFXShader* mShader;
 };

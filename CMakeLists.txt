@@ -11,11 +11,18 @@ include_directories(engine_test lib/SDL/include)
 include_directories(engine_test lib/bgfx/bgfx/include)
 include_directories(engine_test lib/bgfx/bimg/include)
 include_directories(engine_test lib/bgfx/bx/include)
+include_directories(engine_test lib/bgfx/bx/include/compat/msvc)
 
 set(SRC_MAIN
     main.cpp
     game.cpp
     game.h
+    BGFXShader.cpp
+    BGFXShader.h
+    BGFXUtil.cpp
+    BGFXUtil.h
+    BGFXVertexLayouts.cpp
+    BGFXVertexLayouts.h
 )
 
 add_executable(engine_test ${SRC_MAIN})
