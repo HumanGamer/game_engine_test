@@ -110,6 +110,7 @@ bool initGraphics(uint32_t width, uint32_t height)
     bgfx::Init init = {};
     init.resolution.width = width;
     init.resolution.height = height;
+    init.resolution.reset = BGFX_RESET_VSYNC;
     bgfx::init(init);
 
     return true;
@@ -125,7 +126,7 @@ int main(int argc, char* argv[])
     if (!initGraphics(width, height))
         return 1;
 
-    game = new Game(window);
+    game = new Game(window, width, height);
 
     game->init();
     gameLoop();

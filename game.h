@@ -6,7 +6,7 @@
 class Game
 {
 public:
-    Game(SDL_Window* window);
+    Game(SDL_Window* window, uint32_t width, uint32_t height);
     ~Game();
 
     void init();
@@ -17,4 +17,5 @@ private:
     SDL_Window* mWindow;
 
     BGFXShader* mShader;
+    uint32_t mWidth, mHeight;
 };
