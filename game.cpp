@@ -17,7 +17,6 @@ Game::~Game()
 
 void Game::init()
 {
-    bgfxUtilInit();
     init_bgfx_vertex_layouts();
     mShader = new BGFXShader("color");
 }
@@ -45,41 +44,10 @@ void Game::render()
                  0, bgfx::getCaps()->homogeneousDepth);
     bgfx::setViewTransform(0, nullptr, ortho);
 
-//    float proj[16];
-//    bx::mtxProj(proj,
-//                60.0f, (float)mWidth / (float)mHeight,
-//                0.1f, 100.0f, bgfx::getCaps()->homogeneousDepth);
-//    bgfx::setViewTransform(0, view, proj);
     bgfx::setViewRect(0, 0, 0, mWidth, mHeight);
     bgfx::touch(0);
 
-    //setDiscardColor(0.0f, 1.0f, 0.0f);
-    //bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
-    /*static uint32_t blendval = 0;
-    bgfx::setState(0
-                   | BGFX_STATE_DEFAULT
-                   | BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE,BGFX_STATE_BLEND_INV_SRC_ALPHA)
-        ,blendval
-    );*/
-    //bgfx::setState(BGFX_STATE_DEFAULT| BGFX_STATE_BLEND_FUNC_SEPARATE(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ZERO, BGFX_STATE_BLEND_INV_SRC_ALPHA));//BGFX_STATE_BLEND_ALPHA );
-    /*bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_ONE, BGFX_STATE_BLEND_ONE)
-                                        | BGFX_STATE_BLEND_INDEPENDENT
-        , 0
-          | BGFX_STATE_BLEND_FUNC_RT_1(BGFX_STATE_BLEND_ZERO, BGFX_STATE_BLEND_SRC_COLOR));*/
-    /*bgfx::setState(0
-                   | BGFX_STATE_WRITE_RGB
-                   | BGFX_STATE_BLEND_FUNC(BGFX_STATE_BLEND_INV_SRC_ALPHA, BGFX_STATE_BLEND_SRC_ALPHA)
-    );*/
-    /*bgfx::setState(0
-                   | BGFX_STATE_CULL_CW
-                   | BGFX_STATE_WRITE_RGB
-                   | BGFX_STATE_WRITE_A
-                   | BGFX_STATE_DEPTH_TEST_LESS
-                   | BGFX_STATE_MSAA
-                   | BGFX_STATE_BLEND_ALPHA);*/
-
-
-    bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);//, 0x00000055);
+    bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
 
     int w = mWidth / 2;
     int h = mHeight / 2;
@@ -87,9 +55,6 @@ void Game::render()
     int yoff = mHeight / 8;
     renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 1.0f, 0x550000FF);
     renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 2.0f, 0x5500FF00);
-
-    //bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
-    //renderScreenSpaceQuad(0, mShader->getProgram(), 0, 0, mWidth, mHeight, 1.0f, 0xFF000000);
 
     bgfx::frame();
 }

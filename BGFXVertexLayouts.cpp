@@ -1,7 +1,6 @@
 #include "BGFXVertexLayouts.h"
 
-bgfx::VertexLayout PosColorTexcoordVertex::ms_layout;
-bgfx::VertexLayout PosNormalTangentTexcoordVertex::ms_layout;
+bgfx::VertexLayout PosColorVertex::ms_layout;
 
 void init_bgfx_vertex_layouts()
 {
@@ -10,6 +9,5 @@ void init_bgfx_vertex_layouts()
         return;
     initialized = true;
 
-    PosColorTexcoordVertex::init();
-    PosNormalTangentTexcoordVertex::init();
+    PosColorVertex::init();
 }
