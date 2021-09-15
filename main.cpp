@@ -3,6 +3,7 @@
 #include <SDL_syswm.h>
 #include <bgfx/bgfx.h>
 #include <bgfx/platform.h>
+#include "game.h"
 
 static void* sdlNativeWindowHandle(SDL_Window* _window)
 {
@@ -114,10 +115,9 @@ bool initGraphics(uint32_t width, uint32_t height)
     return true;
 }
 
-void setup();
 void gameLoop();
-void update();
-void render();
+
+static Game* game;
 
 int main(int argc, char* argv[])
 {
@@ -125,17 +125,14 @@ int main(int argc, char* argv[])
     if (!initGraphics(width, height))
         return 1;
 
-    setup();
+    game = new Game(window);
+
+    game->init();
     gameLoop();
 
     sdlDestroyWindow(window);
 
     return 0;
-}
-
-void setup()
-{
-
 }
 
 void gameLoop()
@@ -156,22 +153,7 @@ void gameLoop()
             }
         }
 
-        update();
-        render();
+        game->update();
+        game->render();
     }
-}
-
-void update()
-{
-
-}
-
-void render()
-{
-    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH);
-    bgfx::touch(0);
-
-
-
-    bgfx::frame();
 }
