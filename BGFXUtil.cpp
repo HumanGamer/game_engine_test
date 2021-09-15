@@ -188,7 +188,7 @@ void renderScreenSpaceQuad(bgfx::ViewId _view, bgfx::ProgramHandle _program, flo
         indices[4] = 3;
         indices[5] = 2;
 
-        bgfx::setState(BGFX_STATE_DEFAULT);// | BGFX_STATE_BLEND_ALPHA );
+        //bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA );
         //bgfx::setState(0 | BGFX_STATE_WRITE_RGB | BGFX_STATE_WRITE_A | BGFX_STATE_BLEND_ALPHA);
         bgfx::setIndexBuffer(&tib);
         bgfx::setVertexBuffer(0, &tvb);

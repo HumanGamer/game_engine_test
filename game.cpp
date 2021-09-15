@@ -54,8 +54,13 @@ void Game::render()
     bgfx::touch(0);
 
     //setDiscardColor(0.0f, 1.0f, 0.0f);
-    renderScreenSpaceQuad(0, mShader->getProgram(), 10, 10, 100, 100, 0.0f, 0xFF0000FF);
-    renderScreenSpaceQuad(0, mShader->getProgram(), 60, 60, 100, 100, 0.0f, 0xFF00FF00);
+    bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA );
+    int w = mWidth / 2;
+    int h = mHeight / 2;
+    int xoff = mWidth / 8;
+    int yoff = mHeight / 8;
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 0.0f, 0x550000FF);
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 0.0f, 0xFF00FF00);
 
     bgfx::frame();
 }
