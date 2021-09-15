@@ -85,8 +85,8 @@ void Game::render()
     int h = mHeight / 2;
     int xoff = mWidth / 8;
     int yoff = mHeight / 8;
-    renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 0.0f, 0x550000FF);
-    renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 0.0f, 0x5500FF00);
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 1.0f, 0x550000FF);
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 2.0f, 0x5500FF00);
 
     //bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
     //renderScreenSpaceQuad(0, mShader->getProgram(), 0, 0, mWidth, mHeight, 1.0f, 0xFF000000);

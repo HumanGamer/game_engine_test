@@ -108,7 +108,7 @@ bool initGraphics(uint32_t width, uint32_t height)
     sdlSetWindow(window);
 
     bgfx::Init init = {};
-    init.type = bgfx::RendererType::OpenGL;
+    //init.type = bgfx::RendererType::OpenGL;
     init.resolution.width = width;
     init.resolution.height = height;
     init.resolution.reset = BGFX_RESET_VSYNC;
