@@ -28,13 +28,9 @@ void Game::update()
 
 void Game::render()
 {
-    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 1.0f, 0);
-
-    const bx::Vec3 at = {0.0f, 0.0f, 0.0f};
-    const bx::Vec3 eye = {0.0f, 0.0f, -35.0f};
-
-    float view[16];
-    bx::mtxLookAt(view, eye, at);
+    // Palette color is needed for blending to look correct
+    bgfx::setPaletteColor(0, 0.0f, 0.0f, 0.0f, 0.0f);
+    bgfx::setViewClear(0, BGFX_CLEAR_COLOR | BGFX_CLEAR_DEPTH, 1.0f, 0, 0); // Last argument is palette index
 
     float ortho[16];
     bx::mtxOrtho(ortho,
@@ -47,14 +43,27 @@ void Game::render()
     bgfx::setViewRect(0, 0, 0, mWidth, mHeight);
     bgfx::touch(0);
 
-    bgfx::setState(BGFX_STATE_DEFAULT | BGFX_STATE_BLEND_ALPHA);
+    const uint64_t alpha_blend_state = 0
+                           | BGFX_STATE_WRITE_RGB
+                           | BGFX_STATE_WRITE_A
+                           //| BGFX_STATE_WRITE_Z // DO NOT WRITE Z DURING ALPHA BLENDING
+                           | BGFX_STATE_DEPTH_TEST_LESS
+                           | BGFX_STATE_CULL_CW
+                           | BGFX_STATE_MSAA
+                           | BGFX_STATE_BLEND_ALPHA;
 
     int w = mWidth / 2;
     int h = mHeight / 2;
     int xoff = mWidth / 8;
     int yoff = mHeight / 8;
-    renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 0.0f, 0x550000FF);
-    renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 1.0f, 0x5500FF00);
+
+    // Red Square with 50% opacity
+    bgfx::setState(alpha_blend_state);
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff, yoff, w, h, 0.0f, 0x7F0000FF);
+
+    // Green Square with 100% opacity
+    bgfx::setState(BGFX_STATE_DEFAULT);
+    renderScreenSpaceQuad(0, mShader->getProgram(), xoff + w/ 2, yoff + h / 2, w, h, 1.0f, 0xFF00FF00);
 
     bgfx::frame();
 }
